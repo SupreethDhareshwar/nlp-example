@@ -8,3 +8,8 @@ Example : `py -m pip install nltk` and `py -m pip install beautifulsoup4`
 * For nltk, if you get punkt error, run on python shell the following :
     `import nltk
     nltk.download('punkt')`
+
+## Running the project 
+
+* cd to the project directory
+* Run `py .\app.py`
