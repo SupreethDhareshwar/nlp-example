@@ -11,5 +11,16 @@ Example : `py -m pip install nltk` and `py -m pip install beautifulsoup4` `py -m
 
 ## Running the project 
 
+### Corpus Analysis (Part 1)
 * cd to the project directory
-* Run `py .\app.py`
+* Run `py .\analyzeCorpus.py`
+
+### Vector Space Model (Part 2)
+* cd to the project directory
+* Run `py .\createIndex.py`
+* This will analyze the input wiki file and generate inverted index in a separate data folder
+* Run `py .\query.py "<query_text>"` to query the inverted index and get the top 10 results. Example: `py .\query.py "7th infantry"` 
+
+
+
+
