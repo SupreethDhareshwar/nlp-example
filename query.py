@@ -2,8 +2,7 @@ import pickle
 import os
 import sys
 import math
-from utils import textprocessing
-from utils import helpers
+import helpers
 from collections import Counter
 ''' Query '''
 
@@ -22,7 +21,7 @@ dictionary = set(inverted_index.keys())
 # Get query from command line
 query = sys.argv[1]
 # Preprocess query
-query = textprocessing.preprocess_text(query)
+query = helpers.preprocess_text(query)
 query = [word for word in query if word in dictionary]
 query = Counter(query)
 

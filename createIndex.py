@@ -3,7 +3,7 @@ import sys
 import pickle
 import math
 from collections import Counter
-from utils import textprocessing, helpers
+import  helpers
 from bs4 import BeautifulSoup
 
 ''' Index data '''
@@ -23,7 +23,7 @@ corpus = []
 docs = []
 
 for doc_tag in soup.find_all('doc'):
-    words = textprocessing.preprocess_text(doc_tag.text)
+    words = helpers.preprocess_text(doc_tag.text)
     bag_of_words = Counter(words)
     corpus.append(bag_of_words)
     docs.append(doc_tag["title"])

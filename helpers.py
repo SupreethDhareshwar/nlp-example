@@ -1,6 +1,8 @@
 import os
 from collections import defaultdict
 import math
+import string
+
 ''' Helper functions '''
 
 def compute_idf(corpus):
@@ -38,3 +40,16 @@ def build_inverted_index(idf, corpus):
             inverted_index[word]['postings_list'].append([index, value])
 
     return inverted_index
+
+def remove_punctuations(text):
+    out = text.translate(str.maketrans('', '', string.punctuation))
+    return out
+
+def remove_stopwords(text):
+    words = [word for word in text.split()]
+    return words
+
+def preprocess_text(text):
+    processed_text = remove_punctuations(text.lower())
+    words = remove_stopwords(processed_text)
+    return words
