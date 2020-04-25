@@ -3,23 +3,16 @@
 ID : 2019HT12489
 """
 import os
-from bs4 import BeautifulSoup
 import nltk
 from nltk import word_tokenize
 from nltk.util import ngrams
-from nltk.stem import PorterStemmer 
 from collections import Counter
 from nltk.probability import FreqDist
-
-ps = PorterStemmer() 
-
-resources_path = os.path.join(os.getcwd(), 'wiki_02')
-
-with open(file = resources_path, mode= "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp,features="html.parser")
+import helpers
 
 #Analyses Document Corpus
-print("Analysing Corpus")
+print("Analyzing Corpus")
+soup = helpers.parseCorpus()
 totalWordCount = 0
 unigramFrequencies = Counter([])
 bigramFrequencies = Counter([])
@@ -38,13 +31,11 @@ for doc_tag in soup.find_all('doc'):
     trigramFrequencies += Counter(trigrams)
 
     #Stem all the tokens
-    stemToken = []
-    for w in token: 
-        stemToken.append( ps.stem(w)) 
+    stemmed_words = helpers.stem_words(token)
 
-    unigramsStem = ngrams(stemToken, 1)
-    bigramsStem = ngrams(stemToken, 2)    
-    trigramsStem = ngrams(stemToken, 3)
+    unigramsStem = ngrams(stemmed_words, 1)
+    bigramsStem = ngrams(stemmed_words, 2)    
+    trigramsStem = ngrams(stemmed_words, 3)
     unigramStemFrequencies += Counter(unigramsStem)
     bigramStemFrequencies += Counter(bigramsStem)
     trigramStemFrequencies += Counter(trigramsStem)

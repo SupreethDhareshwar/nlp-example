@@ -3,18 +3,13 @@ import sys
 import pickle
 import math
 from collections import Counter
-import  helpers
-from bs4 import BeautifulSoup
+import helpers
 
-''' Index data '''
-resources_path = os.path.join(os.getcwd(), 'wiki_02')
 data_path = os.path.join(os.getcwd(), 'data')
 
 print('Indexing....')
 
-with open(file = resources_path, mode= "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp,features="html.parser")
-
+soup = helpers.parseCorpus()
 
 if not os.path.exists(data_path):
     os.mkdir(data_path)

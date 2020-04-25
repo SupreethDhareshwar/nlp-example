@@ -2,9 +2,24 @@ import os
 from collections import defaultdict
 import math
 import string
+from bs4 import BeautifulSoup
+from nltk.stem import PorterStemmer 
 
-''' Helper functions '''
+ps = PorterStemmer() 
 
+resources_path = os.path.join(os.getcwd(), 'wiki_02')
+
+def parseCorpus():
+    fp = open(file = resources_path, mode= "r", encoding="utf8")
+    soup = BeautifulSoup(fp,features="html.parser")
+    return soup
+
+def stem_words(words):
+    stemmer = PorterStemmer()
+    stemmed_words = [stemmer.stem(word) for word in words]
+    return stemmed_words
+    
+     
 def compute_idf(corpus):
     num_docs = len(corpus)
     idf = defaultdict(lambda: 0)
@@ -45,11 +60,7 @@ def remove_punctuations(text):
     out = text.translate(str.maketrans('', '', string.punctuation))
     return out
 
-def remove_stopwords(text):
-    words = [word for word in text.split()]
-    return words
-
 def preprocess_text(text):
     processed_text = remove_punctuations(text.lower())
-    words = remove_stopwords(processed_text)
+    words = processed_text.split()
     return words
