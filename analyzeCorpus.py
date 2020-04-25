@@ -76,6 +76,10 @@ def corpusAnalysis():
     
     return
 
+#Creates a vector space model index    
+def createIndex():
+
+    return
 #Start of Code
 def main():
     print("Starting IR Code!")
