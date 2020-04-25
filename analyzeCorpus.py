@@ -7,7 +7,6 @@ import nltk
 from nltk import word_tokenize
 from nltk.util import ngrams
 from collections import Counter
-from nltk.probability import FreqDist
 import helpers
 
 #Analyses Document Corpus
@@ -40,40 +39,23 @@ for doc_tag in soup.find_all('doc'):
     bigramStemFrequencies += Counter(bigramsStem)
     trigramStemFrequencies += Counter(trigramsStem)
 
-corpus90count = 0.9 * totalWordCount
 #Before Stemming
-print("Total unique unigrams : ",len(unigramFrequencies))
-freqDistUni = FreqDist(unigramFrequencies)  
-freqDistUniMostCommon = freqDistUni.most_common()
-freqDistUni.plot(50,title="Plot of the 50 most common 1-grams")   
 
-print("Total unique bigrams : ",len(bigramFrequencies))
-freqDistBi = FreqDist(bigramFrequencies)  
-freqDistBiMostCommon = freqDistBi.most_common()
+print("Results before stemming")
 
-freqDistBi.plot(50,title="Plot of the 50 most common 2-grams")   
+helpers.processResults(n=1,ngramFrequencies=unigramFrequencies,totalWordCount=totalWordCount)
 
-print("Total unique trigrams : ",len(trigramFrequencies))
-freqDistTri = FreqDist(trigramFrequencies)  
-freqDistTriMostCommon = freqDistTri.most_common()
+helpers.processResults(n=2,ngramFrequencies=bigramFrequencies,totalWordCount=totalWordCount)
 
-freqDistTri.plot(50,title="Plot of the 50 most common 3-grams")   
+helpers.processResults(n=3,ngramFrequencies=trigramFrequencies,totalWordCount=totalWordCount)
 
 #After Stemming
-print("Total unique unigrams after stemming : ",len(unigramStemFrequencies))
-freqDistUniStem = FreqDist(unigramStemFrequencies)  
-freqDistUniStemMostCommon = freqDistUniStem.most_common()
 
-freqDistUniStem.plot(50,title="Plot of the 50 most common 1-grams after stemming")   
+print("Results after stemming")
 
-print("Total unique bigrams after stemming : ",len(bigramStemFrequencies))
-freqDistBiStem = FreqDist(bigramStemFrequencies)  
-freqDistBiStemMostCommon = freqDistBiStem.most_common()
+helpers.processResults(n=1,ngramFrequencies=unigramStemFrequencies,totalWordCount=totalWordCount)
 
-freqDistBiStem.plot(50,title="Plot of the 50 most common 2-grams after stemming")   
+helpers.processResults(n=2,ngramFrequencies=bigramStemFrequencies,totalWordCount=totalWordCount)
 
-print("Total unique trigrams after stemming : ",len(trigramStemFrequencies)) 
-freqDistTriStem = FreqDist(trigramStemFrequencies)  
-freqDistTriStemMostCommon = freqDistTriStem.most_common()
+helpers.processResults(n=3,ngramFrequencies=trigramStemFrequencies,totalWordCount=totalWordCount)
 
-freqDistTriStem.plot(50,title="Plot of the 50 most common 3-grams after stemming")   

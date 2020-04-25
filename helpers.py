@@ -4,8 +4,7 @@ import math
 import string
 from bs4 import BeautifulSoup
 from nltk.stem import PorterStemmer 
-
-ps = PorterStemmer() 
+from nltk.probability import FreqDist
 
 resources_path = os.path.join(os.getcwd(), 'wiki_02')
 
@@ -18,8 +17,26 @@ def stem_words(words):
     stemmer = PorterStemmer()
     stemmed_words = [stemmer.stem(word) for word in words]
     return stemmed_words
-    
-     
+
+def getGramCountofCoverage(ngrams, totalWordCount):
+    corpus90count = 0.9 * totalWordCount
+    return 0 
+
+def processResults(n,ngramFrequencies,totalWordCount):
+    print('Total unique {}-grams : {}'.format(n,len(ngramFrequencies)))  
+  
+    freqDist = FreqDist(ngramFrequencies)  
+    freqDistMostCommon = freqDist.most_common()
+
+    corpuscover90count = getGramCountofCoverage(freqDistMostCommon,totalWordCount)
+
+    print('{}-grams required to cover the 90% of the complete corpus : {}'.format(n,corpuscover90count)) 
+
+    plotCount = 50
+    display = "Plot of the {plotCount} most common {n}-grams"
+    freqDist.plot(plotCount,title=display.format(plotCount = plotCount,n=n))  
+    return
+
 def compute_idf(corpus):
     num_docs = len(corpus)
     idf = defaultdict(lambda: 0)
