@@ -7,7 +7,7 @@ from nltk.stem import PorterStemmer
 import matplotlib.pyplot as plt
 from nltk.probability import FreqDist
 
-resources_path = os.path.join(os.getcwd(), 'wiki_02')
+resources_path = os.path.join(os.getcwd(), 'wiki_00')
 
 def parseCorpus():
     fp = open(file = resources_path, mode= "r", encoding="utf8")
