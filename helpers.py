@@ -4,6 +4,7 @@ import math
 import string
 from bs4 import BeautifulSoup
 from nltk.stem import PorterStemmer 
+import matplotlib.pyplot as plt
 from nltk.probability import FreqDist
 
 resources_path = os.path.join(os.getcwd(), 'wiki_02')
@@ -39,9 +40,13 @@ def processResults(n,ngramFrequencies,totalWordCount):
 
     print('{}-grams required to cover 90% of the complete corpus : {}'.format(n,corpuscover90count)) 
 
+    plt.figure(figsize = (10,6))
+    plt.gcf().subplots_adjust(bottom=0.45) # to avoid x-ticks cut-off
+
     plotCount = 50
     display = "Plot of the {plotCount} most common {n}-grams"
-    freqDist.plot(plotCount,title=display.format(plotCount = plotCount,n=n))  
+    freqDist.plot(plotCount,title=display.format(plotCount = plotCount,n=n), cumulative=False)  
+    plt.show()
     return
 
 def compute_idf(corpus):

@@ -12,6 +12,8 @@ import helpers
 #Analyses Document Corpus
 print("Analyzing Corpus")
 soup = helpers.parseCorpus()
+cleaned_text = soup.get_text()
+
 totalWordCount = 0
 unigramFrequencies = Counter([])
 bigramFrequencies = Counter([])
