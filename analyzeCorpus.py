@@ -25,19 +25,20 @@ bigramStemFrequencies = Counter([])
 trigramStemFrequencies = Counter([])
 
 for doc_tag in soup.find_all('doc'):
-    token = word_tokenize(doc_tag.text)
-    totalWordCount += len(token)
+    tokens = word_tokenize(doc_tag.text)
+    tokens= [token.lower() for token in tokens if not re.match(r'^[_\W]+$', token)]
+    totalWordCount += len(tokens)
 
-    unigrams = ngrams(token, 1)
-    bigrams = ngrams(token, 2)    
-    trigrams = ngrams(token, 3)
+    unigrams = ngrams(tokens, 1)
+    bigrams = ngrams(tokens, 2)    
+    trigrams = ngrams(tokens, 3)
 
     unigramFrequencies += Counter(unigrams)
     bigramFrequencies += Counter(bigrams)
     trigramFrequencies += Counter(trigrams)
 
     #Stem all the tokens
-    stemmed_words = helpers.stem_words(token)
+    stemmed_words = helpers.stem_words(tokens)
 
     unigramsStem = ngrams(stemmed_words, 1)
     bigramsStem = ngrams(stemmed_words, 2)    

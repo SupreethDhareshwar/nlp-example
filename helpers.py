@@ -19,35 +19,59 @@ def stem_words(words):
     stemmed_words = [stemmer.stem(word) for word in words]
     return stemmed_words
 
-def getGramCountofCoverage(ngrams, totalWordCount):
-    corpus90count = 0.9 * totalWordCount
-    gramIndexCount = 0
-    totalGramFrequencyCount = 0
-    for index,value in ngrams:
-        if totalGramFrequencyCount > corpus90count:
-            break
-        totalGramFrequencyCount += value
-        gramIndexCount +=1
-    return gramIndexCount 
-
 def processResults(n,ngramFrequencies,totalWordCount):
-    print('Total unique {}-grams : {}'.format(n,len(ngramFrequencies)))  
-  
     freqDist = FreqDist(ngramFrequencies)  
     freqDistMostCommon = freqDist.most_common()
 
-    corpuscover90count = getGramCountofCoverage(freqDistMostCommon,totalWordCount)
+    corpus90count = 0.9 * totalWordCount
+    gramIndexCount = 0
+    totalGramFrequencyCount = 0
+    values = []
+    for k,v in freqDistMostCommon:
+        if totalGramFrequencyCount < corpus90count:
+            totalGramFrequencyCount += v
+            gramIndexCount +=1
+        values.append(v)
 
-    print('{}-grams required to cover 90% of the complete corpus : {}'.format(n,corpuscover90count)) 
+    print('Total unique {}-grams : {}'.format(n,len(ngramFrequencies)))  
 
-    plt.figure(figsize = (10,6))
-    plt.gcf().subplots_adjust(bottom=0.45) # to avoid x-ticks cut-off
+    print('{}-grams required to cover 90% of the complete corpus : {}'.format(n,gramIndexCount)) 
+    # plt.xscale("log")
+    # plt.yscale("log")
+    
+    # fig = plt.figure() 
+   
+    # ax = fig.add_axes([0,0,2,1]) 
+    # ax.plot(values) 
+    # # naming the x axis 
+    # ax.set_xlabel('Rank') 
+    # # naming the y axis 
+    # ax.set_ylabel('Word Count') 
+    # # giving a title to  graph 
+    # display = "Frequency Distribution of {n}-grams" 
+    # ax.set_title("Word Distribution") 
 
+    # plt.show()
+
+    
+    fig = plt.figure(figsize = (10,6))
+    fig.subplots_adjust(bottom=0.45) # to avoid x-ticks cut-off
+    # plt.xscale("log")
+    # plt.yscale("log")
     plotCount = 50
     display = "Plot of the {plotCount} most common {n}-grams"
-    freqDist.plot(plotCount,title=display.format(plotCount = plotCount,n=n), cumulative=False)  
-    plt.show()
+    freqDist.plot(plotCount,title=display.format(plotCount = plotCount,n=n), cumulative=False)
     return
+
+# def oldcode():
+#     plt.figure(figsize = (10,6))
+#     plt.gcf().subplots_adjust(bottom=0.45) # to avoid x-ticks cut-off
+
+#     plotCount = 50
+#     display = "Plot of the {plotCount} most common {n}-grams"
+#     freqDist.plot(plotCount,title=display.format(plotCount = plotCount,n=n), cumulative=False)  
+#     plt.show()
+#     return
 
 def compute_idf(corpus):
     num_docs = len(corpus)
