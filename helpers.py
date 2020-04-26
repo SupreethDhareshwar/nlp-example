@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 from nltk.stem import PorterStemmer 
 import matplotlib.pyplot as plt
 from nltk.probability import FreqDist
+from nltk import word_tokenize
 
 resources_path = os.path.join(os.getcwd(), 'wiki_00')
 
@@ -87,7 +88,9 @@ def compute_idf(corpus):
 
 def compute_weights(idf, doc):
     for word, value in doc.items():
-        doc[word] = idf[word] * (1 + math.log(value))
+        # doc[word] = idf[word] * (1 + math.log(value))
+        doc[word] =  (1 + math.log(value))
+
 
 
 def normalize(doc):
@@ -115,5 +118,5 @@ def remove_punctuations(text):
 
 def preprocess_text(text):
     processed_text = remove_punctuations(text.lower())
-    words = processed_text.split()
+    words = word_tokenize(processed_text)
     return words
