@@ -20,7 +20,14 @@ def stem_words(words):
 
 def getGramCountofCoverage(ngrams, totalWordCount):
     corpus90count = 0.9 * totalWordCount
-    return 0 
+    gramIndexCount = 0
+    totalGramFrequencyCount = 0
+    for index,value in ngrams:
+        if totalGramFrequencyCount > corpus90count:
+            break
+        totalGramFrequencyCount += value
+        gramIndexCount +=1
+    return gramIndexCount 
 
 def processResults(n,ngramFrequencies,totalWordCount):
     print('Total unique {}-grams : {}'.format(n,len(ngramFrequencies)))  
@@ -30,7 +37,7 @@ def processResults(n,ngramFrequencies,totalWordCount):
 
     corpuscover90count = getGramCountofCoverage(freqDistMostCommon,totalWordCount)
 
-    print('{}-grams required to cover the 90% of the complete corpus : {}'.format(n,corpuscover90count)) 
+    print('{}-grams required to cover 90% of the complete corpus : {}'.format(n,corpuscover90count)) 
 
     plotCount = 50
     display = "Plot of the {plotCount} most common {n}-grams"
