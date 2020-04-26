@@ -35,10 +35,10 @@ inverted_index_file = os.path.join(data_path, 'inverted_index.pickle')
 dictionary_file = os.path.join(data_path, 'dictionary.txt')
 
 # Serialize data
-with open(docs_file, 'wb',encoding='utf-8') as f:
+with open(docs_file, 'wb') as f:
     pickle.dump(docs, f)
 
-with open(inverted_index_file, 'wb',encoding='utf-8') as f:
+with open(inverted_index_file, 'wb') as f:
     pickle.dump(inverted_index, f)
 
 with open(dictionary_file, 'w',encoding='utf-8') as f:
