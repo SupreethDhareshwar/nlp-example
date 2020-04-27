@@ -8,6 +8,9 @@ Example : `py -m pip install nltk` and `py -m pip install beautifulsoup4` `py -m
 * For nltk, if you get punkt error, run on python shell the following :
     `import nltk
     nltk.download('punkt')`
+* Open https://drive.google.com/drive/folders/1ZsnuEm7_N6aUwhjFpv-TZXFt4DiYex4t
+* Download the file AF/wiki_63
+* Copy the file into current project directory and rename it as wiki_00
 
 ## Running the project 
 
