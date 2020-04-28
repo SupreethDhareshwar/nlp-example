@@ -28,7 +28,7 @@ Example : `py -m pip install nltk` and `py -m pip install beautifulsoup4` `py -m
 
 2) Running Query on Inverted Index
 * cd to the project directory
-* This query assumes the generated output files from index creation is present at data folder
+* This query.py code assumes the generated output files from index creation is present at data folder
 * This query.py will query and read only the output files from the Index Creation Code and not the corpus
 * Run `py .\query.py "<query_text>"` to query the inverted index and get the top 10 results. Example: `py .\query.py "7th infantry"` 
 
