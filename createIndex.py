@@ -7,7 +7,7 @@ import helpers
 
 data_path = os.path.join(os.getcwd(), 'data')
 
-print('Indexing....')
+print('Building Index')
 
 soup = helpers.parseCorpus()
 
@@ -45,4 +45,4 @@ with open(dictionary_file, 'w',encoding='utf-8') as f:
     for word in idf.keys():
         f.write(word + '\n')
 
-print('Index done.')
+print('Index creation completed. Output files are at data/')
