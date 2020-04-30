@@ -35,7 +35,6 @@ Example : `py -m pip install nltk` and `py -m pip install beautifulsoup4` `py -m
 **Note** : I have kept general helper functions in a separate helpers.py . This contains common functions used by the above 3 files.
 
 Author : Supreeth Dhareshwar
-ID : 2019HT12489
 
 
 
